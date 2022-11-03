@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="StatementPrinterTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-11-03T10:53:55" hostname="HP-PC" time="0.476">
+  <properties/>
+  <testcase name="exampleStatement()" classname="StatementPrinterTests" time="0.457"/>
+  <testcase name="statementWithNewPlayTypes()" classname="StatementPrinterTests" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
