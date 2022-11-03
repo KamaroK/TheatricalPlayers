@@ -3,6 +3,7 @@ import java.util.*;
 
 public class StatementPrinter {
 
+
   public StringBuffer print(Invoice invoice, Map<String, Play> plays) {
     int totalAmount = 0;
     int volumeCredits = 0;
@@ -35,15 +36,15 @@ public class StatementPrinter {
       // add volume credits
       volumeCredits += Math.max(perf.audience - 30, 0);
       // add extra credit for every ten comedy attendees
-      if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
+      if ("comedy".equals(play.type)) 
+        volumeCredits += Math.floor(perf.audience / 5);
 
       // print line for this order
-      result = result.append("  " + play.name + ": " + frmt.format(thisAmount / 100) + " (" + perf.audience + " seats)\n");
+      result.append(" l " + play.name + ": " + frmt.format(thisAmount / 100) + " (" + perf.audience + " seats)\n");
       totalAmount += thisAmount;
     }
-    result = result.append("Amount owed is " + frmt.format(totalAmount / 100) + "\n");
-    result = result.append("You earned " + volumeCredits + " credits\n");
-    System.out.println(result);
+    result.append("Amount owed is " + frmt.format(totalAmount / 100) + "\n");
+    result.append("You earned " + volumeCredits + " credits\n");
     
     return result;
   }
