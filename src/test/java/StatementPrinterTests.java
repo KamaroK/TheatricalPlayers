@@ -15,7 +15,7 @@ public class StatementPrinterTests {
                 "as-like", new Comedy("As You Like It"),
                 "othello", new Tragedy("Othello"));
 
-        Invoice invoice = new Invoice("BigCo", List.of(
+        Invoice invoice = new Invoice(new Customer("BigCo", "1", 103), List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
                 new Performance("othello", 40)));
@@ -27,13 +27,13 @@ public class StatementPrinterTests {
     }
 
     @Test
-    void exampleStatement() {
+    void exampleStatementCustomer() {
         Map<String, Play> plays = Map.of(
                 "hamlet",  new Tragedy("Hamlet"),
                 "as-like", new Comedy("As You Like It"),
                 "othello", new Tragedy("Othello"));
-        Customer ex = new Customer
-        Invoice invoice = new Invoice("BigCo", List.of(
+
+        Invoice invoice = new Invoice(new Customer("BigCo", "1", 150), List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
                 new Performance("othello", 40)));

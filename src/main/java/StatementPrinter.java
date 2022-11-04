@@ -34,13 +34,20 @@ public class StatementPrinter {
   }
 
   public String print(Invoice invoice, Map<String, Play> plays) {
-    StringBuffer result = new StringBuffer("Statement for " + invoice.customer + "\n");
+    StringBuffer result = new StringBuffer("Statement for " + invoice.customer.name + "\n");
 
     for (Performance perf : invoice.performances) {
       // print every play
       result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(perfPlay(perf, plays).getPrice(perf.audience)) + " (" + perf.audience + " seats)\n");
     }
+    if(invoice.customer.soldCredits >= 150){
+      int totalAmount = totalAmount(invoice, plays) - 15;
+      int volumeCredits = invoice.customer.soldCredits - 150;
+      result.append("Amount owed is " + frmt.format(totalAmount) + "\n");
+      result.append("You earned " + volumeCredits + " credits\n");
 
+      return result.toString();
+    }
     result.append("Amount owed is " + frmt.format(totalAmount(invoice, plays)) + "\n");
     result.append("You earned " + volumeCredits(invoice, plays) + " credits\n");
     
