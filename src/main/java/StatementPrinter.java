@@ -1,17 +1,37 @@
 import java.text.NumberFormat;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 
 public class StatementPrinter {
 
-
   public String printHTML(Invoice invoice, Map<String, Play> plays) {
-    StringBuffer result = new StringBuffer();
+    String result = "";
+    try {
+      result = Files.readString(Paths.get(getClass().getResource("templates\\HTMLTemplate.txt").toURI()));
+    } catch (Exception e) {
+      throw new Error("Cannot read template");
+    }
     
-    return result.toString();
+    StringBuffer invoiceItems = new StringBuffer();
+    for (Performance perf : invoice.performances) {
+      invoiceItems.append(
+              "<tr>\n"
+              + "<td>" + perfPlay(perf, plays).name  + "</td>\n"
+              + "<td>" + currencyFormat(computeAmount(perf, plays)) + "</td>\n"
+              + "<td>" + perf.audience + "</td>\n"
+              + "</tr>\n");
+    }
+
+    result.replace("{$Invoice_Items}", invoiceItems.toString());
+    result.replace("{@Invoice_Amount}", Integer.toString(totalAmount(invoice, plays)));
+    result.replace("{$Total_Credits}", Integer.toString(volumeCredits(invoice, plays))); 
+
+    return result;
   }
 
-  public String printText(Invoice invoice, Map<String, Play> plays) {
+  public String print(Invoice invoice, Map<String, Play> plays) {
     StringBuffer result = new StringBuffer("Statement for " + invoice.customer + "\n");
 
     for (Performance perf : invoice.performances) {

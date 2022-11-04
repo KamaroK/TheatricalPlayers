@@ -21,10 +21,28 @@ public class StatementPrinterTests {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.printText(invoice, plays);
+        var result = statementPrinter.print(invoice, plays);
 
         verify(result);
     }
+
+    /*@Test
+    void exampleStatementHTML() {
+        Map<String, Play> plays = Map.of(
+                "hamlet",  new Play("Hamlet", "tragedy"),
+                "as-like", new Play("As You Like It", "comedy"),
+                "othello", new Play("Othello", "tragedy"));
+
+        Invoice invoice = new Invoice("BigCo", List.of(
+                new Performance("hamlet", 55),
+                new Performance("as-like", 35),
+                new Performance("othello", 40)));
+
+        StatementPrinter statementPrinter = new StatementPrinter();
+        var result = statementPrinter.printHTML(invoice, plays);
+
+        verify(result);
+    }*/
 
     @Test
     void statementWithNewPlayTypes() {
@@ -38,7 +56,7 @@ public class StatementPrinterTests {
 
         StatementPrinter statementPrinter = new StatementPrinter();
         Assertions.assertThrows(Error.class, () -> {
-            statementPrinter.printText(invoice, plays);
+            statementPrinter.print(invoice, plays);
         });
     }
 }
