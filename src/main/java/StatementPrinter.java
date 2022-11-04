@@ -21,8 +21,8 @@ public class StatementPrinter {
         volumeCredits += Math.floor(perf.audience / 5);
 
       // print line for this order
-      result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(totalAmount(perf, perfPlay(perf, plays), plays) / 100) + " (" + perf.audience + " seats)\n");
-      totalAmount += totalAmount(perf, perfPlay(perf, plays), plays);
+      result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(totalAmount(perf, plays) / 100) + " (" + perf.audience + " seats)\n");
+      totalAmount += totalAmount(perf, plays);
     }
     result.append("Amount owed is " + frmt.format(totalAmount / 100) + "\n");
     result.append("You earned " + volumeCredits + " credits\n");
@@ -30,7 +30,7 @@ public class StatementPrinter {
     return result;
   }
 
-  private int totalAmount(Performance perf, Play play, Map<String, Play> plays)
+  private int totalAmount(Performance perf, Map<String, Play> plays)
   {
     int result = 0;
 
