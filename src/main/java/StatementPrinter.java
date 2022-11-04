@@ -10,17 +10,15 @@ public class StatementPrinter {
     int volumeCredits = 0;
     StringBuffer result = new StringBuffer("Statement for " + invoice.customer + "\n");
 
-    NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
-
     for (Performance perf : invoice.performances) {
 
       volumeCredits += volumeCredits(perf, plays);
 
       // print line for this order
-      result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(totalAmount(perf, plays) / 100) + " (" + perf.audience + " seats)\n");
+      result.append("  " + perfPlay(perf, plays).name + ": " + currencyFormat(totalAmount(perf, plays) / 100) + " (" + perf.audience + " seats)\n");
       totalAmount += totalAmount(perf, plays);
     }
-    result.append("Amount owed is " + frmt.format(totalAmount / 100) + "\n");
+    result.append("Amount owed is " + currencyFormat(totalAmount / 100) + "\n");
     result.append("You earned " + volumeCredits + " credits\n");
     
     return result;
@@ -62,5 +60,9 @@ public class StatementPrinter {
     if ("comedy".equals(perfPlay(perf, plays).type)) 
       result += Math.floor(perf.audience / 5);
     return result;
+  }
+
+  private String currencyFormat(int totalAmount) {
+    return NumberFormat.getCurrencyInstance(Locale.US).format(totalAmount);
   }
 }
