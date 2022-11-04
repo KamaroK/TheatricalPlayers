@@ -5,26 +5,27 @@ import java.util.*;
 public class StatementPrinter {
 
 
-  public StringBuffer print(Invoice invoice, Map<String, Play> plays) {
-    int totalAmount = 0;
-    int volumeCredits = 0;
+  public String printHTML(Invoice invoice, Map<String, Play> plays) {
+    StringBuffer result = new StringBuffer();
+    
+    return result.toString();
+  }
+
+  public String printText(Invoice invoice, Map<String, Play> plays) {
     StringBuffer result = new StringBuffer("Statement for " + invoice.customer + "\n");
 
     for (Performance perf : invoice.performances) {
-
-      volumeCredits += volumeCredits(perf, plays);
-
-      // print line for this order
-      result.append("  " + perfPlay(perf, plays).name + ": " + currencyFormat(totalAmount(perf, plays)) + " (" + perf.audience + " seats)\n");
-      totalAmount += totalAmount(perf, plays);
+      // print every play
+      result.append("  " + perfPlay(perf, plays).name + ": " + currencyFormat(computeAmount(perf, plays)) + " (" + perf.audience + " seats)\n");
     }
-    result.append("Amount owed is " + currencyFormat(totalAmount) + "\n");
-    result.append("You earned " + volumeCredits + " credits\n");
+
+    result.append("Amount owed is " + currencyFormat(totalAmount(invoice, plays)) + "\n");
+    result.append("You earned " + volumeCredits(invoice, plays) + " credits\n");
     
-    return result;
+    return result.toString();
   }
 
-  private int totalAmount(Performance perf, Map<String, Play> plays)
+  private int computeAmount(Performance perf, Map<String, Play> plays)
   {
     int result = 0;
 
@@ -48,17 +49,35 @@ public class StatementPrinter {
     return result;
   }
 
+  private int totalAmount(Invoice invoice, Map<String, Play> plays){
+    int result = 0;
+
+    for(Performance perf: invoice.performances){
+      result += computeAmount(perf, plays);
+    }
+    return result;
+  }
+
   private Play perfPlay(Performance perf, Map<String, Play> plays) {
     return plays.get(perf.playID);
   }
 
-  private int volumeCredits(Performance perf, Map<String, Play> plays){
+  private int computeCredits(Performance perf, Map<String, Play> plays){
     int result = 0;
     result += Math.max(perf.audience - 30, 0);
 
     // add extra credit for every ten comedy attendees
     if ("comedy".equals(perfPlay(perf, plays).type)) 
       result += Math.floor(perf.audience / 5);
+    return result;
+  }
+
+  private int volumeCredits(Invoice invoice, Map<String, Play> plays){
+    int result = 0;
+
+    for(Performance perf: invoice.performances){
+      result += computeCredits(perf, plays);
+    }
     return result;
   }
 
