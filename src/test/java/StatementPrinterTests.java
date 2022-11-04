@@ -21,7 +21,7 @@ public class StatementPrinterTests {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.print(invoice, plays);
+        var result = statementPrinter.printText(invoice, plays);
 
         verify(result);
     }
@@ -39,7 +39,7 @@ public class StatementPrinterTests {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.print(invoice, plays);
+        var result = statementPrinter.printText(invoice, plays);
 
         verify(result);
     }
