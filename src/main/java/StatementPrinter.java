@@ -14,11 +14,7 @@ public class StatementPrinter {
 
     for (Performance perf : invoice.performances) {
 
-      // add volume credits
-      volumeCredits += Math.max(perf.audience - 30, 0);
-      // add extra credit for every ten comedy attendees
-      if ("comedy".equals(perfPlay(perf, plays).type)) 
-        volumeCredits += Math.floor(perf.audience / 5);
+      volumeCredits += volumeCredits(perf, plays);
 
       // print line for this order
       result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(totalAmount(perf, plays) / 100) + " (" + perf.audience + " seats)\n");
@@ -56,5 +52,15 @@ public class StatementPrinter {
 
   private Play perfPlay(Performance perf, Map<String, Play> plays) {
     return plays.get(perf.playID);
+  }
+
+  private int volumeCredits(Performance perf, Map<String, Play> plays){
+    int result = 0;
+    result += Math.max(perf.audience - 30, 0);
+
+    // add extra credit for every ten comedy attendees
+    if ("comedy".equals(perfPlay(perf, plays).type)) 
+      result += Math.floor(perf.audience / 5);
+    return result;
   }
 }
