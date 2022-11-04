@@ -1,10 +1,14 @@
-public class Play {
-
+public abstract class Play {
+  
   public String name;
-  public String type;
 
-  public Play(String name, String type) {
+  public Play() { }
+
+  public Play(String name) {
     this.name = name;
-    this.type = type;
   }
+
+  public abstract float getPrice(int audience);
+
+  public abstract int getCredits(int audience);
 }
