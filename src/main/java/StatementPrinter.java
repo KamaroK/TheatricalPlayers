@@ -18,7 +18,7 @@ public class StatementPrinter {
       int totalAmount = totalAmount(invoice, plays) - 15;
       int volumeCredits = invoice.customer.soldCredits - 150;
 
-      result.append("You have been deducted of 150 credits and 15$\n");
+      result.append("Congratulations!\nYou have been deducted of 150 credits and 15$\n");
       result.append("Amount owed is " + frmt.format(totalAmount) + "\n");
       result.append("You earned " + volumeCredits + " credits\n");
 
@@ -46,6 +46,27 @@ public class StatementPrinter {
         +"\t\t\t\t\t <td>" + frmt.format(perfPlay(perf, plays).getPrice(perf.audience)) + "</td> \n"
         +"\t\t\t\t</tr> \n");
     }
+
+    if(invoice.customer.soldCredits >= 150){
+      int totalAmount = totalAmount(invoice, plays) - 15;
+      int volumeCredits = invoice.customer.soldCredits - 150;
+
+      result.append("\t\t\t\t<tr> \n"
+      + "\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Total owed:<b></td> \n"
+      + "\t\t\t\t\t <td>" + frmt.format(totalAmount)+ "</td> \n"
+      + "\t\t\t\t</tr> \n");
+      result.append("\t\t\t\t<tr> \n"
+      + "\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Fidelity points earned:<b></td> \n"
+      + "\t\t\t\t\t <td>" + volumeCredits + "</td> \n"
+      + "\t\t\t\t</tr> \n");
+
+      result.append("\t\t\t</table> \n"
+      + "\t\t\t<p>Congratulations! You have been deducted of 150 credits and 15$</p> \n"
+      + "\t\t\t<p>Payment is required under 30 days. We can break your knees if you don't do so.</p> \n"
+      + "\t\t</body> \n"
+      + "\t</html> \n");
+      return result.toString();
+    }    
 
     result.append("\t\t\t\t<tr> \n"
     +"\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Total owed:<b></td> \n"
