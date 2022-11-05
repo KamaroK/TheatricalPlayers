@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StatementPrinterTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-05T18:22:12" hostname="HP-PC" time="0.898">
+<testsuite name="StatementPrinterTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-11-05T18:59:09" hostname="HP-PC" time="1.374">
   <properties/>
-  <testcase name="exampleStatementHTML()" classname="StatementPrinterTests" time="0.572"/>
-  <testcase name="exampleStatementHTMLCustomer()" classname="StatementPrinterTests" time="0.104"/>
-  <testcase name="exampleStatement()" classname="StatementPrinterTests" time="0.124"/>
-  <testcase name="exampleStatementCustomer()" classname="StatementPrinterTests" time="0.095"/>
+  <testcase name="exampleStatementHTML()" classname="StatementPrinterTests" time="0.845"/>
+  <testcase name="exampleStatementHTMLCustomer()" classname="StatementPrinterTests" time="0.128"/>
+  <testcase name="exampleStatement()" classname="StatementPrinterTests" time="0.23"/>
+  <testcase name="exampleStatementCustomer()" classname="StatementPrinterTests" time="0.164"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

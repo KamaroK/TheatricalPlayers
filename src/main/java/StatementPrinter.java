@@ -15,14 +15,11 @@ public class StatementPrinter {
       result.append("  " + perfPlay(perf, plays).name + ": " + frmt.format(perfPlay(perf, plays).getPrice(perf.audience)) + " (" + perf.audience + " seats)\n");
     }
     if(invoice.customer.soldCredits >= 150){
-      int totalPrices
-   = totalPrices
-  (invoice, plays) - 15;
+      int totalPrices = totalPrices(invoice, plays) - 15;
       int totalCredits = invoice.customer.soldCredits - 150;
 
       result.append("Congratulations!\nYou have been deducted of 150 credits and 15$\n");
-      result.append("Amount owed is " + frmt.format(totalPrices
-  ) + "\n");
+      result.append("Amount owed is " + frmt.format(totalPrices) + "\n");
       result.append("You earned " + totalCredits + " credits\n");
 
       return result.toString();
@@ -52,15 +49,12 @@ public class StatementPrinter {
     }
 
     if(invoice.customer.soldCredits >= 150){
-      int totalPrices
-   = totalPrices
-  (invoice, plays) - 15;
+      int totalPrices = totalPrices(invoice, plays) - 15;
       int totalCredits = invoice.customer.soldCredits - 150;
 
       result.append("\t\t\t\t<tr> \n"
       + "\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Total owed:<b></td> \n"
-      + "\t\t\t\t\t <td>" + frmt.format(totalPrices
-  )+ "</td> \n"
+      + "\t\t\t\t\t <td>" + frmt.format(totalPrices)+ "</td> \n"
       + "\t\t\t\t</tr> \n");
       result.append("\t\t\t\t<tr> \n"
       + "\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Fidelity points earned:<b></td> \n"
