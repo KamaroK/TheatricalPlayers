@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h2>Invoice</h2>
-<p><strong>Client:</strong> BigCo</p>
-<table>
-<tr>
-<th>Piece</th>
-<th>Seats Sold</th>
-<th>Price</th>
-</tr>
-<tr>
-<td>Hamlet</td>
-<td>55</td>
-<td>$650.00</td>
-</tr>
-<tr>
-<td>As You Like It</td>
-<td>35</td>
-<td>$580.00</td>
-</tr>
-<tr>
-<td>Othello</td>
-<td>40</td>
-<td>$500.00</td>
-</tr>
-<tr>
-<td colspan="2" style="text-align: right;"><strong>Total Owed:</strong></td>
-<td>$1,730.00</td>
-</tr>
-<tr>
-<td colspan="2" style="text-align: right;"><strong>Fidelity Points Earned:</strong></td>
-<td>47</td>
-</tr>
-</table>
-<p>The invoice is due in 30 days. We can break your legs if you want so</p>
-</body>
-</html>
+<!DOCTYPE html> 
+	<html> 
+		<body> 
+			<h1>Invoice</h1> 
+			<p><b>Client :</b> BigCo</h2> 
+			<table style="width: 400px" border="1px solid black"> 
+				<tr> 
+					 <th>Piece</th> 
+					 <th>Seats sold</th> 
+					 <th>Price</th> 
+				</tr> 
+				<tr> 
+					 <td>Hamlet</td> 
+					 <td>55</td> 
+					 <td>$650.00</td> 
+				</tr> 
+				<tr> 
+					 <td>As You Like It</td> 
+					 <td>35</td> 
+					 <td>$580.00</td> 
+				</tr> 
+				<tr> 
+					 <td>Othello</td> 
+					 <td>40</td> 
+					 <td>$500.00</td> 
+				</tr> 
+				<tr> 
+					 <td colspan="2" style="text-align: right;"><b>Total owed:<b></td> 
+					 <td>$1,730.00</td> 
+				</tr> 
+				<tr> 
+					 <td colspan="2" style="text-align: right;"><b>Fidelity points earned:<b></td> 
+					 <td>47</td> 
+				</tr> 
+			</table> 
+			<p>Payment is required under 30 days. We can break your knees if you don't do so.</p> 
+		</body> 
+	</html> 

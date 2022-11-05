@@ -21,7 +21,7 @@ public class StatementPrinterTests {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.printText(invoice, plays);
+        var result = statementPrinter.toText(invoice, plays);
 
         verify(result);
     }
@@ -39,28 +39,28 @@ public class StatementPrinterTests {
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.printText(invoice, plays);
+        var result = statementPrinter.toText(invoice, plays);
 
         verify(result);
     }
 
-    /*@Test
+    @Test
     void exampleStatementHTML() {
         Map<String, Play> plays = Map.of(
-                "hamlet",  new Play("Hamlet", "tragedy"),
-                "as-like", new Play("As You Like It", "comedy"),
-                "othello", new Play("Othello", "tragedy"));
+                "hamlet",  new Tragedy("Hamlet"),
+                "as-like", new Comedy("As You Like It"),
+                "othello", new Tragedy("Othello"));
 
-        Invoice invoice = new Invoice("BigCo", List.of(
+        Invoice invoice = new Invoice(new Customer("BigCo", "1", 0), List.of(
                 new Performance("hamlet", 55),
                 new Performance("as-like", 35),
                 new Performance("othello", 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.printHTML(invoice, plays);
+        var result = statementPrinter.toHTML(invoice, plays);
 
         verify(result);
-    }*/
+    }
 
     /*@Test
     void statementWithNewPlayTypes() {

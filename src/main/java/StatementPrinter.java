@@ -1,6 +1,5 @@
 import java.text.NumberFormat;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.*;
 
 
@@ -8,7 +7,7 @@ public class StatementPrinter {
 
   final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
-  public String printText(Invoice invoice, Map<String, Play> plays) {
+  public String toText(Invoice invoice, Map<String, Play> plays) {
     StringBuffer result = new StringBuffer("Statement for " + invoice.customer.name + "\n");
 
     for (Performance perf : invoice.performances) {
@@ -31,29 +30,40 @@ public class StatementPrinter {
     return result.toString();
   }
 
-  public String printHTML(Invoice invoice, Map<String, Play> plays) {
-    String result = "";
-    try {
-      result = Files.readString(Paths.get(getClass().getResource("templates\\HTMLTemplate.txt").toURI()));
-    } catch (Exception e) {
-      throw new Error("Cannot read template");
-    }
+  public String toHTML(Invoice invoice, Map<String, Play> plays) {
+    StringBuffer result = new StringBuffer("<!DOCTYPE html> \n"+"\t<html> \n"
+    + "\t\t<body> \n"
+    + "\t\t\t<h1>Invoice</h1> \n"+"\t\t\t<p><b>Client :</b> " 
+    + invoice.customer.name + "</h2> \n"
+    + "\t\t\t<table style=\"width: 400px\" border=\"1px solid black\"> \n"
+    + "\t\t\t\t<tr> \n"+"\t\t\t\t\t <th>Piece</th> \n"+"\t\t\t\t\t <th>Seats sold</th> \n"
+    + "\t\t\t\t\t <th>Price</th> \n"+"\t\t\t\t</tr> \n");
     
-    StringBuffer invoiceItems = new StringBuffer();
     for (Performance perf : invoice.performances) {
-      invoiceItems.append(
-              "<tr>\n"
-              + "<td>" + perfPlay(perf, plays).name  + "</td>\n"
-              + "<td>" + frmt.format(perfPlay(perf, plays).getPrice(perf.audience)) + "</td>\n"
-              + "<td>" + perf.audience + "</td>\n"
-              + "</tr>\n");
+      result.append("\t\t\t\t<tr> \n"
+        +"\t\t\t\t\t <td>" + perfPlay(perf, plays).name + "</td> \n"
+        +"\t\t\t\t\t <td>" + perf.audience + "</td> \n"
+        +"\t\t\t\t\t <td>" + frmt.format(perfPlay(perf, plays).getPrice(perf.audience)) + "</td> \n"
+        +"\t\t\t\t</tr> \n");
     }
 
-    result.replace("{$Invoice_Items}", invoiceItems.toString());
-    result.replace("{@Invoice_Amount}", Integer.toString(totalAmount(invoice, plays)));
-    result.replace("{$Total_Credits}", Integer.toString(volumeCredits(invoice, plays))); 
+    result.append("\t\t\t\t<tr> \n"
+    +"\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Total owed:<b></td> \n"
+    +"\t\t\t\t\t <td>" + frmt.format(totalAmount(invoice, plays))+ "</td> \n"
+    +"\t\t\t\t</tr> \n");
 
-    return result;
+    result.append("\t\t\t\t<tr> \n"
+    + "\t\t\t\t\t <td colspan=\"2\" style=\"text-align: right;\"><b>Fidelity points earned:<b></td> \n"
+    + "\t\t\t\t\t <td>" + volumeCredits(invoice, plays) + "</td> \n"
+    + "\t\t\t\t</tr> \n");
+
+    result.append("\t\t\t</table> \n"
+    + "\t\t\t<p>Payment is required under 30 days. We can break your knees if you don't do so.</p> \n"
+    + "\t\t</body> \n"
+    + "\t</html> \n");
+
+
+    return result.toString();
   }
 
   private int totalAmount(Invoice invoice, Map<String, Play> plays){
